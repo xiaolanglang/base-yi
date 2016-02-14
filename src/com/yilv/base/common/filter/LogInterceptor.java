@@ -5,11 +5,12 @@ import java.text.SimpleDateFormat;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.yilv.base.common.service.BaseService;
 import com.yilv.base.common.utils.DateUtils;
 
 /**
@@ -18,9 +19,11 @@ import com.yilv.base.common.utils.DateUtils;
  * @author ThinkGem
  * @version 2014-8-19
  */
-public class LogInterceptor extends BaseService implements HandlerInterceptor {
+public class LogInterceptor implements HandlerInterceptor {
 
 	private static final ThreadLocal<Long> startTimeThreadLocal = new NamedThreadLocal<Long>("ThreadLocal StartTime");
+
+	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		if (logger.isDebugEnabled()) {

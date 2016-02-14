@@ -1,6 +1,7 @@
 package com.yilv.base.common.dao.impl;
 
 import java.lang.reflect.Field;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -19,9 +20,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.yilv.base.common.dao.interfaces.ICrudDao;
 import com.yilv.base.common.dao.interfaces.IEnableEntity;
 import com.yilv.base.common.entity.DataEntity;
+import com.yilv.base.common.utils.AccountUtils;
 import com.yilv.base.common.utils.Reflections;
 import com.yilv.base.common.utils.StringUtils;
 import com.yilv.base.common.utils.hibernatepage.HPage;
+import com.yilv.base.modules.account.entity.Account;
 
 /**
  * DAO支持类实现，通用增删改差<br>
@@ -141,6 +144,7 @@ public abstract class CrudDao<T extends DataEntity<T>> implements ICrudDao<T> {
 	 * @return
 	 */
 	public void save(T entity) {
+		preSave(entity);
 		getSession().save(entity);
 	}
 
@@ -151,6 +155,7 @@ public abstract class CrudDao<T extends DataEntity<T>> implements ICrudDao<T> {
 	 * @return
 	 */
 	public void update(T entity) {
+		preUpdate(entity);
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("update " + entity.getClass().getSimpleName() + " set ");
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -334,6 +339,24 @@ public abstract class CrudDao<T extends DataEntity<T>> implements ICrudDao<T> {
 				// 允许找不到get方法
 			}
 		}
+	}
+
+	protected void preUpdate(T entity) {
+		Account account = AccountUtils.getAccount();
+		if (StringUtils.isNotEmpty(account.getId())) {
+			entity.setUpdateBy(AccountUtils.getAccount());
+		}
+		entity.setUpdateDate(new Date());
+	}
+
+	protected void preSave(T entity) {
+		Account account = AccountUtils.getAccount();
+		if (StringUtils.isNotEmpty(account.getId())) {
+			entity.setUpdateBy(AccountUtils.getAccount());
+			entity.setCreateBy(AccountUtils.getAccount());
+		}
+		entity.setCreateDate(new Date());
+		entity.setUpdateDate(new Date());
 	}
 
 }

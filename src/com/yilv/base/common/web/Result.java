@@ -1,23 +1,23 @@
 package com.yilv.base.common.web;
 
 public class Result {
-	private String code;
+	private int code;
 	private String message;
 
 	public Result() {
 
 	}
 
-	public Result(String code, String message) {
+	public Result(int code, String message) {
 		this.code = code;
 		this.message = message;
 	}
 
-	public String getCode() {
+	public int getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
+	public void setCode(int code) {
 		this.code = code;
 	}
 

@@ -2,12 +2,13 @@ package com.yilv.base.common.service.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.yilv.base.common.dao.impl.CrudDao;
 import com.yilv.base.common.entity.DataEntity;
-import com.yilv.base.common.service.BaseService;
 import com.yilv.base.common.service.interfaces.ICrudService;
 import com.yilv.base.common.utils.hibernatepage.HPage;
 
@@ -18,8 +19,9 @@ import com.yilv.base.common.utils.hibernatepage.HPage;
  * @version 2014-05-16
  */
 @Transactional(readOnly = true)
-public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity<T>> extends BaseService implements
-		ICrudService<T> {
+public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity<T>> implements ICrudService<T> {
+
+	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired
 	protected D dao;

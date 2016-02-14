@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.yilv.base.common.security.shiro.session.SessionDAO;
-import com.yilv.base.common.service.BaseService;
 import com.yilv.base.common.utils.AccountUtils;
 import com.yilv.base.modules.account.dao.CAccountDao;
 import com.yilv.base.modules.account.entity.Account;
@@ -27,7 +26,7 @@ import com.yilv.base.sys.security.SystemAuthorizingRealm;
  */
 @Service
 @Transactional(readOnly = true)
-public class SystemService extends BaseService {
+public class SystemService {
 
 	@Autowired
 	private CAccountDao accountDao;

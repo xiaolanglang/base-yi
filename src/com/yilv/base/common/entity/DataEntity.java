@@ -2,39 +2,33 @@ package com.yilv.base.common.entity;
 
 import java.util.Date;
 
-import org.apache.shiro.authc.Account;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.yilv.base.modules.account.entity.Account;
 
 /**
  * 数据Entity类
  * 
- * @author ThinkGem
- * @version 2014-05-16
  */
-@JsonIgnoreProperties(value = { "createBy", "updateBy" })
+@JsonIgnoreProperties(value = { "createBy", "updateBy", "delFlag", "remarks" })
+@MappedSuperclass
 public abstract class DataEntity<T> extends BaseEntity<T> {
 
 	private static final long serialVersionUID = 1L;
 
-	protected String remarks; // 备注
 	protected Account createBy; // 创建者
 	protected Date createDate; // 创建日期
 	protected Account updateBy; // 更新者
 	protected Date updateDate; // 更新日期
-	protected String delFlag; // 删除标记（0：正常；1：删除）
-
-	public String getRemarks() {
-		return remarks;
-	}
-
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
-	}
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@Column(name = "createtime", nullable = false, length = 19)
 	public Date getCreateDate() {
 		return createDate;
 	}
@@ -44,6 +38,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 	}
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@Column(name = "updatetime", nullable = false, length = 19)
 	public Date getUpdateDate() {
 		return updateDate;
 	}
@@ -52,13 +47,24 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 		this.updateDate = updateDate;
 	}
 
-	@JsonIgnore
-	public String getDelFlag() {
-		return delFlag;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "createby")
+	public Account getCreateBy() {
+		return createBy;
 	}
 
-	public void setDelFlag(String delFlag) {
-		this.delFlag = delFlag;
+	public void setCreateBy(Account createBy) {
+		this.createBy = createBy;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "updateBy")
+	public Account getUpdateBy() {
+		return updateBy;
+	}
+
+	public void setUpdateBy(Account updateBy) {
+		this.updateBy = updateBy;
 	}
 
 }

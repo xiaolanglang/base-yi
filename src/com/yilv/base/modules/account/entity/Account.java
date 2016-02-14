@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Length;
+
 import com.yilv.base.common.entity.DataEntity;
 
 @Entity
@@ -42,7 +44,8 @@ public class Account extends DataEntity<Account> {
 		this.username = username;
 	}
 
-	@Column(name = "password", length = 12)
+	@Column(name = "password", length = 32)
+	@Length(min = 6, message = "密码长度不能小于6位")
 	public String getPassword() {
 		return this.password;
 	}
@@ -51,7 +54,8 @@ public class Account extends DataEntity<Account> {
 		this.password = password;
 	}
 
-	@Column(name = "nickname", length = 20)
+	@Column(name = "nickname", length = 10)
+	@Length(max = 10, message = "昵称最大不能超过10个汉字")
 	public String getNickname() {
 		return this.nickname;
 	}

@@ -15,8 +15,6 @@ import com.yilv.base.common.dao.interfaces.IEnableEntity;
 /**
  * Entity支持类
  * 
- * @author ThinkGem
- * @version 2014-05-16
  */
 @MappedSuperclass
 public abstract class BaseEntity<T> implements Serializable, IEnableEntity {
