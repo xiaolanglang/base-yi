@@ -20,6 +20,8 @@ public class DongTai extends DataEntity<DongTai> {
 	private static final long serialVersionUID = 1L;
 	private Account yiUser;
 	private String content;
+	private String range;
+	private String position;
 	private String img1;
 	private String img2;
 	private String img3;
@@ -134,6 +136,24 @@ public class DongTai extends DataEntity<DongTai> {
 
 	public void setImg9(String img9) {
 		this.img9 = img9;
+	}
+
+	@Column(name = "range")
+	public String getRange() {
+		return range;
+	}
+
+	public void setRange(String range) {
+		this.range = range;
+	}
+
+	@Column(name = "position")
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
 	}
 
 }

@@ -2,8 +2,6 @@ package com.yilv.base.common.conf;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.ckfinder.connector.ServletContextFactory;
 import com.google.common.collect.Maps;
 import com.yilv.base.common.utils.PropertiesLoader;
@@ -142,7 +140,7 @@ public class Global {
 	}
 
 	/**
-	 * 结果获得&nbsp;&nbsp;&nbsp;IP地址/服务名称
+	 * 结果获得:http://www.image.com或者http://localhost:8080/yilv
 	 * 
 	 * @param request
 	 * @param webApp
@@ -150,8 +148,8 @@ public class Global {
 	 * 
 	 * @return
 	 */
-	public static String getImageWebPath(HttpServletRequest request) {
-		String basePath = request.getScheme() + "://" + getConfig("web.imageIP");
+	public static String getImageWebPath() {
+		String basePath = "http://" + getConfig("web.imageIP");
 		return basePath;
 	}
 }
