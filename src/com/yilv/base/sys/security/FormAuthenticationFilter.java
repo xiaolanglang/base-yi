@@ -34,7 +34,9 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
 		if (password == null) {
 			password = "";
 		}
-		boolean rememberMe = isRememberMe(request);
+		// boolean rememberMe = isRememberMe(request);
+		// 手机端登录默认记住用户
+		boolean rememberMe = true;
 		String host = StringUtils.getRemoteAddr((HttpServletRequest) request);
 		String captcha = getCaptcha(request);
 		boolean mobile = isMobileLogin(request);

@@ -7,8 +7,10 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +39,7 @@ public class FileUploadUtils {
 	 *            文件名称
 	 * @return
 	 */
-	public static File upload(HttpServletRequest request, String localPath, String newFileName) {
+	public static List<File> upload(HttpServletRequest request, String localPath) {
 		// 创建一个通用的多部分解析器
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession()
 				.getServletContext());
@@ -47,6 +49,7 @@ public class FileUploadUtils {
 			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
 			// 取得request中的所有文件名
 			Iterator<String> iter = multiRequest.getFileNames();
+			List<File> fileList = new ArrayList<File>();
 			while (iter.hasNext()) {
 				// 取得上传文件
 				MultipartFile file = multiRequest.getFile(iter.next());
@@ -58,20 +61,16 @@ public class FileUploadUtils {
 					// 如果名称不为“”,说明该文件存在，否则说明该文件不存在
 					if (fileName.trim() != "") {
 						// 定义上传路径
-						localPath = initPath(localPath);
-						File localFile = new File(localPath);
+						String lPath = initPath(localPath);
+						File localFile = new File(lPath);
 						if (!localFile.exists()) {
 							localFile.mkdirs();
 						}
-						if (StringUtils.isNotBlank(newFileName)) {
-							int index = fileName.lastIndexOf(".");
-							String suffix = fileName.substring(index, fileName.length());
-							localPath = localPath + "/" + newFileName + suffix;
-						} else {
-							localPath = localPath + "/" + fileName;
-						}
-						localPath = initPath(localPath);
-						File lastFile = new File(localPath);
+						String newFileName = IdUtils.uuid();
+						String suffix = fileName.substring(fileName.lastIndexOf("."), fileName.length());
+						lPath = lPath + "/" + newFileName + suffix;
+						lPath = initPath(lPath);
+						File lastFile = new File(lPath);
 						try {
 							file.transferTo(lastFile);
 						} catch (IllegalStateException e) {
@@ -79,10 +78,11 @@ public class FileUploadUtils {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-						return lastFile;
+						fileList.add(lastFile);
 					}
 				}
 			}
+			return fileList;
 		}
 		return null;
 	}
