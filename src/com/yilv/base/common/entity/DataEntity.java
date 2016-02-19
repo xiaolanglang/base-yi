@@ -28,7 +28,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 	protected Date updateDate; // 更新日期
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@Column(name = "createtime", nullable = false, length = 19)
+	@Column(name = "create_time", nullable = false, length = 19)
 	public Date getCreateDate() {
 		return createDate;
 	}
@@ -38,7 +38,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 	}
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@Column(name = "updatetime", nullable = false, length = 19)
+	@Column(name = "update_time", nullable = false, length = 19)
 	public Date getUpdateDate() {
 		return updateDate;
 	}
@@ -48,7 +48,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "createby")
+	@JoinColumn(name = "create_by")
 	public Account getCreateBy() {
 		return createBy;
 	}
@@ -58,7 +58,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "updateBy")
+	@JoinColumn(name = "update_by")
 	public Account getUpdateBy() {
 		return updateBy;
 	}

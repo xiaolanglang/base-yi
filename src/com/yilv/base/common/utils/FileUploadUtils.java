@@ -38,8 +38,11 @@ public class FileUploadUtils {
 	 * @param newFileName
 	 *            文件名称
 	 * @return
+	 * @throws IOException
+	 * @throws IllegalStateException
 	 */
-	public static List<File> upload(HttpServletRequest request, String localPath) {
+	public static List<File> upload(HttpServletRequest request, String localPath) throws IllegalStateException,
+			IOException {
 		// 创建一个通用的多部分解析器
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession()
 				.getServletContext());
@@ -71,13 +74,7 @@ public class FileUploadUtils {
 						lPath = lPath + "/" + newFileName + suffix;
 						lPath = initPath(lPath);
 						File lastFile = new File(lPath);
-						try {
-							file.transferTo(lastFile);
-						} catch (IllegalStateException e) {
-							e.printStackTrace();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+						file.transferTo(lastFile);
 						fileList.add(lastFile);
 					}
 				}
