@@ -16,7 +16,7 @@ import com.yilv.base.modules.account.entity.Account;
  * 数据Entity类
  * 
  */
-@JsonIgnoreProperties(value = { "createBy", "updateBy", "delFlag", "remarks" })
+@JsonIgnoreProperties(value = { "updateBy", "updateDate" })
 @MappedSuperclass
 public abstract class DataEntity<T> extends BaseEntity<T> {
 

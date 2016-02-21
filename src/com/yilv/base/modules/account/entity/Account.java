@@ -6,10 +6,12 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.yilv.base.common.entity.DataEntity;
 
 @Entity
 @Table(name = "yi_account")
+@JsonIgnoreProperties(value = { "password", "username", "phone", "bad" })
 public class Account extends DataEntity<Account> {
 
 	private static final long serialVersionUID = 1L;
