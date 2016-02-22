@@ -16,7 +16,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.yilv.base.common.conf.Global;
 import com.yilv.base.common.utils.AccountUtils;
@@ -32,7 +32,7 @@ import com.yilv.base.sys.service.SystemService;
  * @author ThinkGem
  * @version 2014-7-5
  */
-@Service
+@Component
 public class SystemAuthorizingRealm extends AuthorizingRealm {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
@@ -48,11 +48,13 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 		try {
 			UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
 
-			int activeSessionSize = systemService.getSessionDao().getActiveSessions(false).size();
-			if (logger.isDebugEnabled()) {
-				logger.debug("login submit, active session size: {}, accountname: {}", activeSessionSize,
-						token.getUsername());
-			}
+			// int activeSessionSize =
+			// systemService.getSessionDao().getActiveSessions(false).size();
+			// if (logger.isDebugEnabled()) {
+			// logger.debug("login submit, active session size: {}, accountname: {}",
+			// activeSessionSize,
+			// token.getUsername());
+			// }
 
 			// 校验登录验证码
 			// if (LoginController.isValidateCodeLogin(token.getUsername(),

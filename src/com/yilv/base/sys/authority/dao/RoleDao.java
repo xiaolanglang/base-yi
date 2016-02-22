@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.yilv.base.common.dao.impl.CrudDao;
+import com.yilv.base.common.dao.hibernate.HCrudDao;
 import com.yilv.base.modules.account.entity.Account;
 import com.yilv.base.sys.authority.entity.Role;
 
 @Repository
-public class RoleDao extends CrudDao<Role> {
+public class RoleDao extends HCrudDao<Role> {
 
 	@SuppressWarnings("unchecked")
 	public List<Role> findRoleListByAccount(Account account) {

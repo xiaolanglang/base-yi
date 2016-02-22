@@ -14,7 +14,7 @@ import com.yilv.base.modules.account.entity.Account;
  * YiZixun entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "yi_zixun", catalog = "yi")
+@Table(name = "yi_zixun")
 public class ZiXun extends DataEntity<ZiXun> {
 
 	// Fields

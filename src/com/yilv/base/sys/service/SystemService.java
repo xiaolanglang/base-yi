@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.yilv.base.common.security.shiro.session.SessionDAO;
 import com.yilv.base.common.utils.AccountUtils;
-import com.yilv.base.modules.account.dao.CAccountDao;
+import com.yilv.base.modules.account.dao.HAccountDao;
 import com.yilv.base.modules.account.entity.Account;
 import com.yilv.base.sys.authority.dao.AccountRoleDao;
 import com.yilv.base.sys.authority.dao.PermissionsDao;
@@ -29,7 +29,7 @@ import com.yilv.base.sys.security.SystemAuthorizingRealm;
 public class SystemService {
 
 	@Autowired
-	private CAccountDao accountDao;
+	private HAccountDao accountDao;
 	@Autowired
 	private RoleDao roleDao;
 	@Autowired

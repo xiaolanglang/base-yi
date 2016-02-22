@@ -10,7 +10,7 @@ import javax.persistence.MappedSuperclass;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
-import com.yilv.base.common.dao.interfaces.IEnableEntity;
+import com.yilv.base.common.dao.hibernate.interfaces.IEnableEntity;
 
 /**
  * Entity支持类

@@ -1,4 +1,4 @@
-package com.yilv.base.common.dao.impl;
+package com.yilv.base.common.dao.hibernate;
 
 import java.lang.reflect.Field;
 import java.util.Date;
@@ -17,13 +17,13 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.yilv.base.common.dao.interfaces.ICrudDao;
-import com.yilv.base.common.dao.interfaces.IEnableEntity;
+import com.yilv.base.common.dao.hibernate.interfaces.ICrudDao;
+import com.yilv.base.common.dao.hibernate.interfaces.IEnableEntity;
 import com.yilv.base.common.entity.DataEntity;
 import com.yilv.base.common.utils.AccountUtils;
 import com.yilv.base.common.utils.Reflections;
 import com.yilv.base.common.utils.StringUtils;
-import com.yilv.base.common.utils.hibernatepage.HPage;
+import com.yilv.base.common.utils.page.hibernate.HPage;
 import com.yilv.base.modules.account.entity.Account;
 
 /**
@@ -42,12 +42,10 @@ import com.yilv.base.modules.account.entity.Account;
  * @version 2014-05-16
  * @param <T>
  */
-public abstract class CrudDao<T extends DataEntity<T>> implements ICrudDao<T> {
+public abstract class HCrudDao<T extends DataEntity<T>> implements ICrudDao<T> {
 
 	@Autowired
 	protected SessionFactory sessionFactory;
-
-	protected Session session;
 
 	protected Session getSession() {
 		// 事务必须是开启的(Required)，否则获取不到的
@@ -196,7 +194,8 @@ public abstract class CrudDao<T extends DataEntity<T>> implements ICrudDao<T> {
 		getSession().delete(entity);
 	}
 
-	public List<?> sqlQueryList(String sql, Class<?> clz, boolean cacheable) {
+	@SuppressWarnings("unchecked")
+	public <A> List<A> sqlQueryList(String sql, Class<?> clz, boolean cacheable) {
 		return getSession().createSQLQuery(sql).addEntity(clz).setCacheable(cacheable).list();
 	}
 

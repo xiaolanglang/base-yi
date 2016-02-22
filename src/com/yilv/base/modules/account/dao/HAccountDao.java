@@ -6,11 +6,11 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import com.yilv.base.common.dao.impl.CrudDao;
+import com.yilv.base.common.dao.hibernate.HCrudDao;
 import com.yilv.base.modules.account.entity.Account;
 
 @Repository
-public class CAccountDao extends CrudDao<Account> {
+public class HAccountDao extends HCrudDao<Account> {
 	public Account login(String userName, String passWord) {
 		Criteria criteria = getCriteria(Account.class);
 		criteria.add(Restrictions.eq("username", userName));

@@ -17,9 +17,8 @@ import com.yilv.base.modules.account.entity.Account;
 public class DongTaiGood extends DataEntity<DongTaiGood> {
 
 	private static final long serialVersionUID = 1L;
-	private Account yiUserByOwner;
-	private DongTai yiDongtai;
-	private Account yiUserByUserid;
+	private Account user;
+	private DongTai dongtai;
 
 	// Constructors
 
@@ -27,41 +26,24 @@ public class DongTaiGood extends DataEntity<DongTaiGood> {
 	public DongTaiGood() {
 	}
 
-	/** full constructor */
-	public DongTaiGood(Account yiUserByOwner, DongTai yiDongtai, Account yiUserByUserid) {
-		this.yiUserByOwner = yiUserByOwner;
-		this.yiDongtai = yiDongtai;
-		this.yiUserByUserid = yiUserByUserid;
-	}
-
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "owner")
-	public Account getYiUserByOwner() {
-		return this.yiUserByOwner;
+	@JoinColumn(name = "user")
+	public Account getUser() {
+		return user;
 	}
 
-	public void setYiUserByOwner(Account yiUserByOwner) {
-		this.yiUserByOwner = yiUserByOwner;
+	public void setUser(Account user) {
+		this.user = user;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "dongtaiId")
-	public DongTai getYiDongtai() {
-		return this.yiDongtai;
+	public DongTai getDongtai() {
+		return dongtai;
 	}
 
-	public void setYiDongtai(DongTai yiDongtai) {
-		this.yiDongtai = yiDongtai;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "userid")
-	public Account getYiUserByUserid() {
-		return this.yiUserByUserid;
-	}
-
-	public void setYiUserByUserid(Account yiUserByUserid) {
-		this.yiUserByUserid = yiUserByUserid;
+	public void setDongtai(DongTai dongtai) {
+		this.dongtai = dongtai;
 	}
 
 }

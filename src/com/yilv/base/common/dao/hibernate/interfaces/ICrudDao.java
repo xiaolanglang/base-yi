@@ -1,8 +1,8 @@
-package com.yilv.base.common.dao.interfaces;
+package com.yilv.base.common.dao.hibernate.interfaces;
 
 import java.util.List;
 
-import com.yilv.base.common.utils.hibernatepage.HPage;
+import com.yilv.base.common.utils.page.hibernate.HPage;
 
 /**
  * DAO支持类实现
@@ -92,7 +92,7 @@ public interface ICrudDao<T> {
 	 *            false:没有任何缓存
 	 * @return
 	 */
-	public List<?> sqlQueryList(String sql, Class<?> clz, boolean cacheable);
+	public <A> List<A> sqlQueryList(String sql, Class<?> clz, boolean cacheable);
 
 	/**
 	 * 更新或者插入一条数据

@@ -1,4 +1,4 @@
-package com.yilv.base.common.utils.hibernatepage;
+package com.yilv.base.common.utils.page.hibernate;
 
 public class HpageUtils {
 

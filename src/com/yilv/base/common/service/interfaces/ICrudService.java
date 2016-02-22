@@ -2,7 +2,7 @@ package com.yilv.base.common.service.interfaces;
 
 import java.util.List;
 
-import com.yilv.base.common.utils.hibernatepage.HPage;
+import com.yilv.base.common.utils.page.hibernate.HPage;
 
 /**
  * DAO支持类实现
@@ -60,7 +60,7 @@ public interface ICrudService<T> {
 	 * @param batchTable
 	 * @return
 	 */
-	public List<T> findAllList(Class<?> clz, boolean cacheable, String... associationPaths);
+	public List<T> findAllList(Class<T> clz, boolean cacheable, String... associationPaths);
 
 	/**
 	 * 一张表中的字段很多，但是只需要其中几个字段的时候，可以用这种查询方式

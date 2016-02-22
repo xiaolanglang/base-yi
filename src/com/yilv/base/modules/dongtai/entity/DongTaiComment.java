@@ -14,7 +14,7 @@ import com.yilv.base.modules.account.entity.Account;
  * YiCommentDongtai entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "yi_comment_dongtai", catalog = "yi")
+@Table(name = "yi_comment_dongtai")
 public class DongTaiComment extends DataEntity<DongTaiComment> {
 
 	private static final long serialVersionUID = 1L;

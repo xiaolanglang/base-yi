@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.yilv.base.common.dao.impl.CrudDao;
+import com.yilv.base.common.dao.hibernate.HCrudDao;
 import com.yilv.base.modules.account.entity.Account;
 import com.yilv.base.sys.authority.entity.Permissions;
 
 @Repository
-public class PermissionsDao extends CrudDao<Permissions> {
+public class PermissionsDao extends HCrudDao<Permissions> {
 
 	@SuppressWarnings("unchecked")
 	public List<Permissions> getPermissionsByAccount(Account account) {
