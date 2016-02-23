@@ -10,6 +10,7 @@ import javax.persistence.MappedSuperclass;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.yilv.base.common.dao.hibernate.interfaces.IEnableEntity;
 
 /**
@@ -17,6 +18,7 @@ import com.yilv.base.common.dao.hibernate.interfaces.IEnableEntity;
  * 
  */
 @MappedSuperclass
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler", "fieldHandler" })
 public abstract class BaseEntity<T> implements Serializable, IEnableEntity {
 
 	private static final long serialVersionUID = 1L;

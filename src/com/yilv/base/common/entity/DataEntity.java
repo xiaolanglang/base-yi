@@ -8,7 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.yilv.base.modules.account.entity.Account;
 
@@ -27,7 +26,6 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 	protected Account updateBy; // 更新者
 	protected Date updateDate; // 更新日期
 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "create_time", nullable = false, length = 19)
 	public Date getCreateDate() {
 		return createDate;
@@ -37,7 +35,6 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 		this.createDate = createDate;
 	}
 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "update_time", nullable = false, length = 19)
 	public Date getUpdateDate() {
 		return updateDate;

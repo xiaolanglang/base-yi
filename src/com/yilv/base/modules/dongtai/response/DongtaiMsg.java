@@ -1,14 +1,10 @@
 package com.yilv.base.modules.dongtai.response;
 
+import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yilv.base.common.entity.BaseEntity;
 import com.yilv.base.modules.account.entity.Account;
 
@@ -21,9 +17,10 @@ public class DongtaiMsg extends BaseEntity<DongtaiMsg> {
 	private Account account;
 	// 动态信息
 	private String content;
-	private String createTime;
+	private Date createTime;
 	private String position;
-	private String attitudesCount;
+	private int attitudesCount;
+	private int commentCount;
 	private List<String> imageUrls;
 
 	public DongtaiMsg() {
@@ -33,17 +30,14 @@ public class DongtaiMsg extends BaseEntity<DongtaiMsg> {
 		this.account = account;
 	}
 
-	@Column(name = "attitudesCount")
-	public String getAttitudesCount() {
+	public int getAttitudesCount() {
 		return attitudesCount;
 	}
 
-	public void setAttitudesCount(String attitudesCount) {
+	public void setAttitudesCount(int attitudesCount) {
 		this.attitudesCount = attitudesCount;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "account")
 	public Account getAccount() {
 		return account;
 	}
@@ -52,7 +46,6 @@ public class DongtaiMsg extends BaseEntity<DongtaiMsg> {
 		this.account = account;
 	}
 
-	@Column(name = "content", length = 120)
 	public String getContent() {
 		return content;
 	}
@@ -61,7 +54,6 @@ public class DongtaiMsg extends BaseEntity<DongtaiMsg> {
 		this.content = content;
 	}
 
-	@Column(name = "position")
 	public String getPosition() {
 		return position;
 	}
@@ -70,7 +62,6 @@ public class DongtaiMsg extends BaseEntity<DongtaiMsg> {
 		this.position = position;
 	}
 
-	@Transient
 	public List<String> getImageUrls() {
 		return imageUrls;
 	}
@@ -79,14 +70,21 @@ public class DongtaiMsg extends BaseEntity<DongtaiMsg> {
 		this.imageUrls = imageUrls;
 	}
 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@Column(name = "create_time", nullable = false, length = 19)
-	public String getCreateTime() {
+	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
+	public Date getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(String createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public int getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
 	}
 
 }
