@@ -17,11 +17,14 @@ import com.yilv.base.modules.account.entity.Account;
 @Table(name = "yi_comment_dongtai")
 public class DongTaiComment extends DataEntity<DongTaiComment> {
 
+	// Fields
+
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-	private Account yiUserByUserId;
-	private DongTaiComment yiCommentDongtai;
-	private Account yiUserByCriticId;
-	private DongTai yiDongtai;
+	private Account user;// 被评论人
+	private DongTai dongTai;
 	private String content;
 	private String anonymous;
 
@@ -33,42 +36,22 @@ public class DongTaiComment extends DataEntity<DongTaiComment> {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
-	public Account getYiUserByUserId() {
-		return this.yiUserByUserId;
+	public Account getUser() {
+		return user;
 	}
 
-	public void setYiUserByUserId(Account yiUserByUserId) {
-		this.yiUserByUserId = yiUserByUserId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "parent_id")
-	public DongTaiComment getYiCommentDongtai() {
-		return this.yiCommentDongtai;
-	}
-
-	public void setYiCommentDongtai(DongTaiComment yiCommentDongtai) {
-		this.yiCommentDongtai = yiCommentDongtai;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "critic_id")
-	public Account getYiUserByCriticId() {
-		return this.yiUserByCriticId;
-	}
-
-	public void setYiUserByCriticId(Account yiUserByCriticId) {
-		this.yiUserByCriticId = yiUserByCriticId;
+	public void setUser(Account user) {
+		this.user = user;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "dongtai_id")
-	public DongTai getYiDongtai() {
-		return this.yiDongtai;
+	public DongTai getDongTai() {
+		return dongTai;
 	}
 
-	public void setYiDongtai(DongTai yiDongtai) {
-		this.yiDongtai = yiDongtai;
+	public void setDongTai(DongTai dongTai) {
+		this.dongTai = dongTai;
 	}
 
 	@Column(name = "content", length = 200)

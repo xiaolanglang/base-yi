@@ -18,7 +18,7 @@ public class DongTaiGood extends DataEntity<DongTaiGood> {
 
 	private static final long serialVersionUID = 1L;
 	private Account user;
-	private DongTai dongtai;
+	private DongTai dongTai;
 
 	// Constructors
 
@@ -38,12 +38,12 @@ public class DongTaiGood extends DataEntity<DongTaiGood> {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "dongtaiId")
-	public DongTai getDongtai() {
-		return dongtai;
+	public DongTai getDongTai() {
+		return dongTai;
 	}
 
-	public void setDongtai(DongTai dongtai) {
-		this.dongtai = dongtai;
+	public void setDongTai(DongTai dongTai) {
+		this.dongTai = dongTai;
 	}
 
 }

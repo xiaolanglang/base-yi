@@ -21,6 +21,7 @@ public class DongtaiMsg extends BaseEntity<DongtaiMsg> {
 	private String position;
 	private int attitudesCount;
 	private int commentCount;
+	private String isGood;
 	private List<String> imageUrls;
 
 	public DongtaiMsg() {
@@ -85,6 +86,14 @@ public class DongtaiMsg extends BaseEntity<DongtaiMsg> {
 
 	public void setCommentCount(int commentCount) {
 		this.commentCount = commentCount;
+	}
+
+	public String getIsGood() {
+		return isGood;
+	}
+
+	public void setIsGood(String isGood) {
+		this.isGood = isGood;
 	}
 
 }
