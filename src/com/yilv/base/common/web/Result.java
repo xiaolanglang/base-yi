@@ -3,6 +3,8 @@ package com.yilv.base.common.web;
 public class Result {
 	private int code;
 	private String message;
+	public static final String FAILED = "failed";
+	public static final String SUCCESS = "success";
 
 	public Result() {
 
