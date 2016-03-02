@@ -34,6 +34,10 @@ public class DongTaiComment extends DataEntity<DongTaiComment> {
 	public DongTaiComment() {
 	}
 
+	public DongTaiComment(String id) {
+		this.id = id;
+	}
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	public Account getUser() {
