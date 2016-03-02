@@ -11,7 +11,7 @@ import com.yilv.base.common.entity.DataEntity;
 
 @Entity
 @Table(name = "yi_account")
-@JsonIgnoreProperties(value = { "password", "username", "phone", "bad" })
+@JsonIgnoreProperties(value = { "password", "username", "phone", "bad", "createBy", "createDate" })
 public class Account extends DataEntity<Account> {
 
 	private static final long serialVersionUID = 1L;
