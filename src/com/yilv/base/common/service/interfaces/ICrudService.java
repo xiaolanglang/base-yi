@@ -14,7 +14,7 @@ import com.yilv.base.common.utils.page.hibernate.HPage;
 public interface ICrudService<T> {
 
 	/**
-	 * 获取单条数据
+	 * 获取单条数据 根据ID
 	 * 
 	 * @param entity
 	 * @param batchTable
