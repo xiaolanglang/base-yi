@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.yilv.base.common.dao.hibernate.HCrudDao;
-import com.yilv.base.common.dao.mybatis.Basedao;
+import com.yilv.base.common.dao.mybatis.BaseDao;
 import com.yilv.base.common.entity.DataEntity;
 import com.yilv.base.common.service.BaseService;
 import com.yilv.base.common.service.interfaces.ICrudService;
@@ -18,7 +18,7 @@ import com.yilv.base.common.utils.page.hibernate.HPage;
  * @version 2014-05-16
  */
 @Transactional(readOnly = true)
-public abstract class CrudService<H extends HCrudDao<T>, M extends Basedao<?>, T extends DataEntity<T>> extends
+public abstract class CrudService<H extends HCrudDao<T>, M extends BaseDao<?>, T extends DataEntity<T>> extends
 		BaseService<H, M> implements ICrudService<T> {
 
 	@Override
