@@ -17,7 +17,7 @@ import com.yilv.base.modules.account.entity.Account;
  */
 @JsonIgnoreProperties(value = { "updateBy", "updateDate", "createBy" })
 @MappedSuperclass
-public abstract class DataEntity<T> extends BaseEntity<T> {
+public abstract class DataEntity<T> extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 

@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.yilv.base.common.entity.BaseEntity;
 import com.yilv.base.modules.account.entity.Account;
 
-public class DongtaiMsg extends BaseEntity<DongtaiMsg> {
+public class DongtaiMsg extends BaseEntity {
 	/**
 	 * 
 	 */

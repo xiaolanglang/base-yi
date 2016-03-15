@@ -19,7 +19,7 @@ import com.yilv.base.common.dao.hibernate.interfaces.IEnableEntity;
  */
 @MappedSuperclass
 @JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler", "fieldHandler" })
-public abstract class BaseEntity<T> implements Serializable, IEnableEntity {
+public abstract class BaseEntity implements Serializable, IEnableEntity {
 
 	private static final long serialVersionUID = 1L;
 

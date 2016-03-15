@@ -8,7 +8,7 @@ import com.yilv.base.common.entity.BaseEntity;
 
 @Entity
 @Table(name = "yi_file")
-public class YFileMin extends BaseEntity<YFileMin> {
+public class YFileMin extends BaseEntity {
 	/**
 	 * 
 	 */

@@ -2,6 +2,8 @@ package com.yilv.base.common.dao.mybatis;
 
 import java.util.List;
 
+import com.yilv.base.common.entity.BaseEntity;
+
 /**
  * DAO支持类实现
  * 
@@ -9,7 +11,7 @@ import java.util.List;
  * @version 2014-05-16
  * @param <T>
  */
-public interface MCrudDao<T> {
+public interface MCrudDao<T extends BaseEntity> {
 
 	/**
 	 * 获取单条数据
