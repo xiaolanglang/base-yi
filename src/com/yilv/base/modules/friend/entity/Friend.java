@@ -25,6 +25,13 @@ public class Friend extends DataEntity<Friend> {
 	private Account friend;
 	private String mark;
 
+	public Friend() {
+	}
+
+	public Friend(String id) {
+		this.id = id;
+	}
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "owner", nullable = false)
 	@JsonIgnore
