@@ -34,9 +34,7 @@ public class FileUploadUtils {
 	 * 
 	 * @param request
 	 * @param localPath
-	 *            文件夹的绝对路径，但是不带后缀名，例如：D:/KaiFaRuanJian/wenjian/
-	 * @param newFileName
-	 *            文件名称
+	 *            文件夹的绝对路径，例如：D:/KaiFaRuanJian/wenjian/
 	 * @return
 	 * @throws IOException
 	 * @throws IllegalStateException
@@ -230,7 +228,7 @@ public class FileUploadUtils {
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		String date = format.format(new Date());
 
-		String url = Global.getConfig("web.staticFile") + "/img/" + date;
+		String url = Global.getConfig("web.staticFile") + "/" + date;
 
 		return url;
 	}

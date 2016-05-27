@@ -21,16 +21,6 @@ public interface ICrudDao<T> {
 	public void evict(T model);
 
 	/**
-	 * 强制缓存中所有对象与数据库数据同步
-	 */
-	public void flush();
-
-	/**
-	 * 强制刷新一级缓存中所有的对象
-	 */
-	public void clear();
-
-	/**
 	 * 获取单条数据 By ID
 	 * 
 	 * @param entity
@@ -52,7 +42,8 @@ public interface ICrudDao<T> {
 	 *            分页对象
 	 * @return
 	 */
-	public List<T> findPageList(T entity, boolean cacheable, HPage<T> page, String... associationPaths);
+	public List<T> findPageList(T entity, boolean cacheable, HPage<T> page,
+			String... associationPaths);
 
 	/**
 	 * 不带分页的条件查询
@@ -67,7 +58,8 @@ public interface ICrudDao<T> {
 	 *            表对象
 	 * @return
 	 */
-	public List<T> findList(T entity, boolean cacheable, String... associationPaths);
+	public List<T> findList(T entity, boolean cacheable,
+			String... associationPaths);
 
 	/**
 	 * 查询所有数据
@@ -77,7 +69,8 @@ public interface ICrudDao<T> {
 	 * @param batchTable
 	 * @return
 	 */
-	public List<T> findAllList(Class<?> clz, boolean cacheable, String... associationPaths);
+	public List<T> findAllList(Class<?> clz, boolean cacheable,
+			String... associationPaths);
 
 	/**
 	 * 一张表中的字段很多，但是只需要其中几个字段的时候，可以用这种查询方式

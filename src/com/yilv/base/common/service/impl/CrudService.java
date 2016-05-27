@@ -18,8 +18,8 @@ import com.yilv.base.common.utils.page.hibernate.HPage;
  * @version 2014-05-16
  */
 @Transactional(readOnly = true)
-public abstract class CrudService<H extends HCrudDao<T>, M extends BaseDao<?>, T extends DataEntity<T>> extends
-		BaseService<H, M> implements ICrudService<T> {
+public abstract class CrudService<H extends HCrudDao<T>, M extends BaseDao<?>, T extends DataEntity<T>>
+		extends BaseService<H, M> implements ICrudService<T> {
 
 	@Override
 	public T get(T entity, String... batchTable) {
@@ -27,17 +27,20 @@ public abstract class CrudService<H extends HCrudDao<T>, M extends BaseDao<?>, T
 	}
 
 	@Override
-	public List<T> findPageList(T entity, boolean cacheable, HPage<T> page, String... associationPaths) {
+	public List<T> findPageList(T entity, boolean cacheable, HPage<T> page,
+			String... associationPaths) {
 		return hDao.findPageList(entity, cacheable, page, associationPaths);
 	}
 
 	@Override
-	public List<T> findList(T entity, boolean cacheable, String... associationPaths) {
+	public List<T> findList(T entity, boolean cacheable,
+			String... associationPaths) {
 		return hDao.findList(entity, cacheable, associationPaths);
 	}
 
 	@Override
-	public List<T> findAllList(Class<T> clz, boolean cacheable, String... associationPaths) {
+	public List<T> findAllList(Class<T> clz, boolean cacheable,
+			String... associationPaths) {
 		return hDao.findAllList(clz, cacheable, associationPaths);
 	}
 

@@ -61,16 +61,6 @@ public abstract class HCrudDao<T extends DataEntity<T>> implements ICrudDao<T> {
 		getSession().evict(model);
 	}
 
-	@Override
-	public void flush() {
-		getSession().flush();
-	}
-
-	@Override
-	public void clear() {
-		getSession().clear();
-	}
-
 	/**
 	 * 获取单条数据 By ID
 	 * 
@@ -82,7 +72,8 @@ public abstract class HCrudDao<T extends DataEntity<T>> implements ICrudDao<T> {
 		return (T) getSession().get(entity.getClass(), entity.getId());
 	}
 
-	public List<T> findPageList(T entity, boolean cacheable, HPage<T> page, String... associationPaths) {
+	public List<T> findPageList(T entity, boolean cacheable, HPage<T> page,
+			String... associationPaths) {
 		Criteria criteria = getCriteria(entity.getClass());
 
 		criteria.setCacheable(cacheable);
@@ -98,7 +89,8 @@ public abstract class HCrudDao<T extends DataEntity<T>> implements ICrudDao<T> {
 		return page.getList();
 	}
 
-	public List<T> findList(T entity, boolean cacheable, String... associationPaths) {
+	public List<T> findList(T entity, boolean cacheable,
+			String... associationPaths) {
 		Criteria criteria = getCriteria(entity.getClass());
 
 		createCriterion(criteria, entity, associationPaths);
@@ -110,13 +102,15 @@ public abstract class HCrudDao<T extends DataEntity<T>> implements ICrudDao<T> {
 	}
 
 	@Override
-	public List<T> findAllList(Class<?> clz, boolean cacheable, String... associationPaths) {
+	public List<T> findAllList(Class<?> clz, boolean cacheable,
+			String... associationPaths) {
 
 		Criteria criteria = getCriteria(clz);
 
 		if (associationPaths.length > 0) {
 			for (int i = 0, l = associationPaths.length; i < l; i++) {
-				criteria.createCriteria(associationPaths[i], JoinType.LEFT_OUTER_JOIN);
+				criteria.createCriteria(associationPaths[i],
+						JoinType.LEFT_OUTER_JOIN);
 			}
 		}
 
@@ -158,7 +152,8 @@ public abstract class HCrudDao<T extends DataEntity<T>> implements ICrudDao<T> {
 		buffer.append("update " + entity.getClass().getSimpleName() + " set ");
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		for (Class<?> clazz = entity.getClass(); clazz != Object.class; clazz = clazz.getSuperclass()) {
+		for (Class<?> clazz = entity.getClass(); clazz != Object.class; clazz = clazz
+				.getSuperclass()) {
 			Field[] fields = clazz.getDeclaredFields();
 			getUpdateField(buffer, entity, fields, map);
 		}
@@ -185,7 +180,10 @@ public abstract class HCrudDao<T extends DataEntity<T>> implements ICrudDao<T> {
 	 * @return
 	 */
 	public void delete(T entity) {
-		getSession().createSQLQuery("update " + entity.getClass().getSimpleName() + " set del_flag = 1 where id = :id")
+		getSession()
+				.createSQLQuery(
+						"update " + entity.getClass().getSimpleName()
+								+ " set del_flag = 1 where id = :id")
 				.setParameter("id", entity.getId()).executeUpdate();
 	}
 
@@ -196,7 +194,8 @@ public abstract class HCrudDao<T extends DataEntity<T>> implements ICrudDao<T> {
 
 	@SuppressWarnings("unchecked")
 	public <A> List<A> sqlQueryList(String sql, Class<?> clz, boolean cacheable) {
-		return getSession().createSQLQuery(sql).addEntity(clz).setCacheable(cacheable).list();
+		return getSession().createSQLQuery(sql).addEntity(clz)
+				.setCacheable(cacheable).list();
 	}
 
 	/**
@@ -210,9 +209,11 @@ public abstract class HCrudDao<T extends DataEntity<T>> implements ICrudDao<T> {
 	 *            进行联表查询的创建，这里必须设置为true，如果不设置为true，可能会漏掉需要连接的表
 	 * @param batchTable
 	 */
-	protected void createCriterion(Criteria criteria, IEnableEntity entity, String... associationPaths) {
+	protected void createCriterion(Criteria criteria, IEnableEntity entity,
+			String... associationPaths) {
 
-		for (Class<?> clazz = entity.getClass(); clazz != Object.class; clazz = clazz.getSuperclass()) {
+		for (Class<?> clazz = entity.getClass(); clazz != Object.class; clazz = clazz
+				.getSuperclass()) {
 			Field[] fields = clazz.getDeclaredFields();
 			getSearchField(criteria, entity, fields);
 		}
@@ -239,10 +240,12 @@ public abstract class HCrudDao<T extends DataEntity<T>> implements ICrudDao<T> {
 	 *            用于收集对象
 	 * @param batchTable
 	 */
-	private void traversalClass(Criteria criteria, IEnableEntity entity, String associationPath) {
+	private void traversalClass(Criteria criteria, IEnableEntity entity,
+			String associationPath) {
 
 		if (associationPath != null) {
-			criteria = criteria.createCriteria(associationPath, JoinType.LEFT_OUTER_JOIN);
+			criteria = criteria.createCriteria(associationPath,
+					JoinType.LEFT_OUTER_JOIN);
 		}
 
 		// 第一次运行到这里的时候batchFlag为true，其余的时候都为false
@@ -259,7 +262,8 @@ public abstract class HCrudDao<T extends DataEntity<T>> implements ICrudDao<T> {
 			// 如果对象是空的，就不含有属性，无需遍历，直接返回函数
 			return;
 		}
-		for (Class<?> clazz = iEntity.getClass(); clazz != Object.class; clazz = clazz.getSuperclass()) {
+		for (Class<?> clazz = iEntity.getClass(); clazz != Object.class; clazz = clazz
+				.getSuperclass()) {
 			Field[] fields = clazz.getDeclaredFields();
 			getSearchField(criteria, (IEnableEntity) iEntity, fields);
 		}
@@ -273,12 +277,14 @@ public abstract class HCrudDao<T extends DataEntity<T>> implements ICrudDao<T> {
 	 * @param entity
 	 * @param fields
 	 */
-	private void getSearchField(Criteria criteria, IEnableEntity entity, Field[] fields) {
+	private void getSearchField(Criteria criteria, IEnableEntity entity,
+			Field[] fields) {
 		for (Field field : fields) {
 			try {
 				String fieldName = field.getName();
 				Object fieldValue = Reflections.invokeGetter(entity, fieldName);
-				if (fieldValue == null || StringUtils.isEmpty(String.valueOf(fieldValue))) {
+				if (fieldValue == null
+						|| StringUtils.isEmpty(String.valueOf(fieldValue))) {
 					continue;
 				}
 
@@ -287,12 +293,15 @@ public abstract class HCrudDao<T extends DataEntity<T>> implements ICrudDao<T> {
 				}
 
 				String type = field.getType().toString();
-				if (type.endsWith("int") || type.endsWith("Integer") || type.endsWith("double")
-						|| type.endsWith("Double") || type.endsWith("long") || type.endsWith("Long")
-						|| type.endsWith("short") || type.endsWith("Short") || type.endsWith("char")
-						|| type.endsWith("Character") || type.endsWith("float") || type.endsWith("Float")
-						|| type.endsWith("byte") || type.endsWith("Byte") || type.endsWith("boolean")
-						|| type.endsWith("Boolean") || type.endsWith("String") || type.endsWith("Date")) {
+				if (type.endsWith("int") || type.endsWith("Integer")
+						|| type.endsWith("double") || type.endsWith("Double")
+						|| type.endsWith("long") || type.endsWith("Long")
+						|| type.endsWith("short") || type.endsWith("Short")
+						|| type.endsWith("char") || type.endsWith("Character")
+						|| type.endsWith("float") || type.endsWith("Float")
+						|| type.endsWith("byte") || type.endsWith("Byte")
+						|| type.endsWith("boolean") || type.endsWith("Boolean")
+						|| type.endsWith("String") || type.endsWith("Date")) {
 					// System.out.println(entity.getClass().getSimpleName() +
 					// ":" + fieldName + ">>>>>>" + fieldValue);
 					Criterion c = Restrictions.eq(fieldName, fieldValue);
@@ -305,12 +314,14 @@ public abstract class HCrudDao<T extends DataEntity<T>> implements ICrudDao<T> {
 		}
 	}
 
-	private void getUpdateField(StringBuffer buffer, T entity, Field[] fields, Map<String, Object> map) {
+	private void getUpdateField(StringBuffer buffer, T entity, Field[] fields,
+			Map<String, Object> map) {
 		for (Field field : fields) {
 			try {
 				String fieldName = field.getName();
 				Object fieldValue = Reflections.invokeGetter(entity, fieldName);
-				if (fieldValue == null || StringUtils.isEmpty(String.valueOf(fieldValue))) {
+				if (fieldValue == null
+						|| StringUtils.isEmpty(String.valueOf(fieldValue))) {
 					continue;
 				}
 
@@ -319,12 +330,16 @@ public abstract class HCrudDao<T extends DataEntity<T>> implements ICrudDao<T> {
 				// }
 
 				String type = field.getType().toString();
-				if (type.endsWith("int") || type.endsWith("Integer") || type.endsWith("String")
-						|| fieldValue instanceof IEnableEntity || type.endsWith("double") || type.endsWith("Double")
-						|| type.endsWith("long") || type.endsWith("Long") || type.endsWith("short")
-						|| type.endsWith("Short") || type.endsWith("char") || type.endsWith("Character")
-						|| type.endsWith("float") || type.endsWith("Float") || type.endsWith("byte")
-						|| type.endsWith("Byte") || type.endsWith("boolean") || type.endsWith("Boolean")
+				if (type.endsWith("int") || type.endsWith("Integer")
+						|| type.endsWith("String")
+						|| fieldValue instanceof IEnableEntity
+						|| type.endsWith("double") || type.endsWith("Double")
+						|| type.endsWith("long") || type.endsWith("Long")
+						|| type.endsWith("short") || type.endsWith("Short")
+						|| type.endsWith("char") || type.endsWith("Character")
+						|| type.endsWith("float") || type.endsWith("Float")
+						|| type.endsWith("byte") || type.endsWith("Byte")
+						|| type.endsWith("boolean") || type.endsWith("Boolean")
 						|| type.endsWith("Date")) {
 
 					map.put(fieldName, fieldValue);
@@ -351,8 +366,8 @@ public abstract class HCrudDao<T extends DataEntity<T>> implements ICrudDao<T> {
 	protected void preSave(T entity) {
 		Account account = AccountUtils.getAccount();
 		if (StringUtils.isNotEmpty(account.getId())) {
-			entity.setUpdateBy(AccountUtils.getAccount());
-			entity.setCreateBy(AccountUtils.getAccount());
+			entity.setUpdateBy(account);
+			entity.setCreateBy(account);
 		}
 		entity.setCreateDate(new Date());
 		entity.setUpdateDate(new Date());
